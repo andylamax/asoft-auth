@@ -1,0 +1,4 @@
+{
+  "description": "The web itself",
+  "main": "js/web.js"
+}

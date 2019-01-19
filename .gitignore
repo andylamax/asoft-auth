@@ -1,0 +1,10 @@
+/.gradle
+/.idea
+/out
+/build
+**/build
+*.iml
+*.ipr
+*.iws
+/asoft-auth-db
+/asoft-auth-server/src/main/resources/credentials.txt
