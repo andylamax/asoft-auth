@@ -12,4 +12,5 @@ abstract class UserDao {
     abstract fun get(id: Long): User
     abstract fun login(username: String, password: String): User?
     abstract fun logOut(user: User) : Boolean
+    abstract fun delete(user: User)
 }

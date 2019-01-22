@@ -21,4 +21,5 @@ class AuthRepo private constructor(private val userDao: UserDao) {
     fun get(id: Long): User = userDao.get(id)
     fun login(username: String, password: String): User? = userDao.login(username, password)
     fun logOut(user: User): Boolean = userDao.logOut(user)
+    fun delete(user: User) = userDao.delete(user)
 }

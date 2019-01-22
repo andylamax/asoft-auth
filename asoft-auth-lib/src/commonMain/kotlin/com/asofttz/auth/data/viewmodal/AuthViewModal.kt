@@ -18,4 +18,5 @@ class AuthViewModal(private val repo: AuthRepo) {
     fun login(username: String, password: String): User? = repo.login(username, password)
     fun logOut(user: User): Boolean = repo.logOut(user)
     fun toggleAccess(user: User) = edit(user.apply { isBlocked = !isBlocked })
+    fun delete(user: User) = repo.delete(user)
 }

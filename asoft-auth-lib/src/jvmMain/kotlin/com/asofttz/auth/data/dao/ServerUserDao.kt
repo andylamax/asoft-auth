@@ -61,4 +61,8 @@ class ServerUserDao private constructor(config: AuthDataSourceConfig) : UserDao(
     override fun logOut(user: User): Boolean {
         return true
     }
+
+    override fun delete(user: User) {
+
+    }
 }

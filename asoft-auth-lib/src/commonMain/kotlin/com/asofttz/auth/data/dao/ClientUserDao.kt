@@ -15,7 +15,7 @@ class ClientUserDao private constructor(private val config: AuthDataSourceConfig
         fun getInstance(config: AuthDataSourceConfig): UserDao {
             if (instance == null) {
                 instance = ClientUserDao(config)
-                repeat(100) {
+                repeat(90) {
                     instance?.add(User.fakeUser)
                 }
             }
@@ -51,5 +51,9 @@ class ClientUserDao private constructor(private val config: AuthDataSourceConfig
 
     override fun logOut(user: User): Boolean {
         return true
+    }
+
+    override fun delete(user: User) {
+        cached_users.remove(user)
     }
 }
