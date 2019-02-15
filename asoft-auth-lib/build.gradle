@@ -60,6 +60,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-core:$ktor_version"
                 api project(":asoft-date")
                 implementation project(":asoft-rx")
+                api project(":asoft-persist")
             }
         }
         commonTest {
@@ -76,6 +77,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-cio:$ktor_version"
                 api project(":asoft-date")
                 implementation project(":asoft-rx")
+                implementation project(":asoft-persist")
                 implementation "org.neo4j:neo4j-ogm-core:3.2.0-alpha02"
             }
         }
@@ -92,6 +94,7 @@ kotlin {
                 implementation "io.ktor:ktor-client-js:$ktor_version"
                 api project(":asoft-date")
                 implementation project(":asoft-rx")
+                implementation project(":asoft-persist")
             }
         }
         jsTest {

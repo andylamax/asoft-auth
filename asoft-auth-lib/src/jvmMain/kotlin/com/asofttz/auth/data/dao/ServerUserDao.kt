@@ -1,15 +1,15 @@
 package com.asofttz.auth.data.dao
 
 import com.asofttz.auth.User
-import com.asofttz.auth.data.AuthDataSourceConfig
+import com.asofttz.persist.DataSourceConfig
 import com.asofttz.rx.ObservableList
 import org.neo4j.ogm.config.Configuration
 import org.neo4j.ogm.session.SessionFactory
 
-class ServerUserDao private constructor(config: AuthDataSourceConfig) : UserDao() {
+class ServerUserDao private constructor(config: DataSourceConfig) : UserDao() {
     companion object {
         private var instance: UserDao? = null
-        fun getInstance(config: AuthDataSourceConfig): UserDao {
+        fun getInstance(config: DataSourceConfig): UserDao {
             synchronized(this) {
                 if (instance == null) {
                     instance = ServerUserDao(config)
@@ -28,21 +28,23 @@ class ServerUserDao private constructor(config: AuthDataSourceConfig) : UserDao(
             User::class.java.`package`.name
     )
 
-    override fun add(user: User) = synchronized(this) {
+    override suspend fun create(user: User) = synchronized(this) {
         with(sessionFactory.openSession()) {
             save(user)
             clear()
+            true
         }
     }
 
-    override fun edit(user: User) = synchronized(this) {
+    override suspend fun edit(user: User) = synchronized(this) {
         with(sessionFactory.openSession()) {
             save(user)
             clear()
+            true
         }
     }
 
-    override fun getAll(): ObservableList<User> = synchronized(this) {
+    override suspend fun loadAll(): ObservableList<User> = synchronized(this) {
         return with(sessionFactory.openSession()) {
             ObservableList<User>().apply {
                 value = loadAll(User::class.java).toMutableList()
@@ -50,19 +52,19 @@ class ServerUserDao private constructor(config: AuthDataSourceConfig) : UserDao(
         }
     }
 
-    override fun get(id: Long): User {
+    override suspend fun load(id: Int): User {
         return User.fakeUser
     }
 
-    override fun login(username: String, password: String): User? {
+    override suspend fun login(username: String, password: String): User? {
         return User.fakeUser
     }
 
-    override fun logOut(user: User): Boolean {
+    override suspend fun logOut(user: User): Boolean {
         return true
     }
 
-    override fun delete(user: User) {
-
+    override suspend fun delete(user: User): Boolean {
+        return false
     }
 }

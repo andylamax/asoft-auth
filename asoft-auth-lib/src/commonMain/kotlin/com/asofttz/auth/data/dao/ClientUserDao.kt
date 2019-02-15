@@ -1,45 +1,50 @@
 package com.asofttz.auth.data.dao
 
 import com.asofttz.auth.User
-import com.asofttz.auth.data.AuthDataSourceConfig
-import com.asofttz.date.DateFactory
-import com.asofttz.date.Mil
+import com.asofttz.persist.DataSourceConfig
 import com.asofttz.rx.ObservableList
-import kotlin.math.PI
-import kotlin.math.sin
+import kotlinx.coroutines.delay
 
-class ClientUserDao private constructor(private val config: AuthDataSourceConfig) : UserDao() {
+class ClientUserDao private constructor(private val config: DataSourceConfig) : UserDao() {
 
     companion object {
         private var instance: UserDao? = null
-        fun getInstance(config: AuthDataSourceConfig): UserDao {
+        fun getInstance(config: DataSourceConfig): UserDao {
             if (instance == null) {
                 instance = ClientUserDao(config)
-                repeat(90) {
-                    instance?.add(User.fakeUser)
-                }
             }
             return instance!!
         }
     }
 
-    override fun add(user: User) {
-        cached_users.add(user)
+    override suspend fun create(t: User): Boolean {
+        delay(1000)
+        cached.add(t)
+        return true
     }
 
-    override fun edit(user: User) {
-        cached_users[user.id!!.toInt()] = user
+    override suspend fun edit(t: User): Boolean {
+        delay(1000)
+        return false
     }
 
-    override fun getAll(): ObservableList<User> {
-        return cached_users
+    override suspend fun load(id: Int): User? {
+        delay(1000)
+        return cached.value.getOrNull(id)
     }
 
-    override fun get(id: Long): User {
-        return User.fakeUser
+    override suspend fun loadAll(): ObservableList<User> {
+        if(cached.size==0) {
+            delay(2000)
+            repeat(23) {
+                cached.value.add(User.fakeUser)
+            }
+        }
+        return cached
     }
 
-    override fun login(username: String, password: String): User? {
+    override suspend fun login(username: String, password: String): User? {
+        delay(1000)
         return User.fakeUser.apply {
             fullname = "Anderson Lameck"
             this.username = "andylamax"
@@ -49,11 +54,14 @@ class ClientUserDao private constructor(private val config: AuthDataSourceConfig
         }
     }
 
-    override fun logOut(user: User): Boolean {
+    override suspend fun logOut(user: User): Boolean {
+        delay(1000)
         return true
     }
 
-    override fun delete(user: User) {
-        cached_users.remove(user)
+    override suspend fun delete(user: User):Boolean {
+        delay(1000)
+        cached.remove(user)
+        return true
     }
 }

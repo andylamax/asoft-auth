@@ -1,25 +1,18 @@
 package com.asofttz.auth.server
 
-import com.asofttz.auth.data.AuthDataSourceConfig
 import com.asofttz.auth.data.dao.ServerUserDao
 import com.asofttz.auth.data.dao.UserDao
-import com.asofttz.auth.data.repo.AuthRepo
+import com.asofttz.auth.data.repo.UserRepo
 import com.asofttz.auth.data.viewmodal.AuthViewModal
 import com.asofttz.logging.Logger
-import com.asofttz.logging.data.dao.ServerLogDao
-import com.asofttz.logging.data.db.LogDataSourceConfig
-import com.asofttz.logging.data.repo.LogRepo
-import com.asofttz.logging.data.viewmodal.LogViewModal
+import com.asofttz.persist.DataSourceConfig
 import java.io.File
-import java.lang.Exception
 
 object injection {
 
     val logger = Logger("auth-server")
 
-    private val config = AuthDataSourceConfig().apply {
-        url = "bolt://localhost:9012"
-    }
+    private val config = DataSourceConfig("bolt://localhost:9012")
 
     init {
         val classLoader = javaClass.classLoader
@@ -48,7 +41,7 @@ object injection {
 
     private val userDao: UserDao = ServerUserDao.getInstance(config)
 
-    private val authRepo = AuthRepo.getInstance(userDao)
+    private val authRepo = UserRepo.getInstance(userDao)
 
     val authViewModal = AuthViewModal(authRepo)
 }
