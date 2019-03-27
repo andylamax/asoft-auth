@@ -3,6 +3,7 @@ package com.asofttz.auth.data.dao
 import com.asofttz.auth.User
 import com.asofttz.persist.DataSourceConfig
 import com.asofttz.rx.ObservableList
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
 class ClientUserDao private constructor(private val config: DataSourceConfig) : UserDao() {
@@ -33,24 +34,24 @@ class ClientUserDao private constructor(private val config: DataSourceConfig) : 
         return cached.value.getOrNull(id)
     }
 
-    override suspend fun loadAll(): ObservableList<User> {
-        if(cached.size==0) {
+    override suspend fun loadAll(): ObservableList<User> = coroutineScope {
+        if (cached.size == 0) {
+            val users = mutableListOf<User>()
             delay(2000)
             repeat(23) {
-                cached.value.add(User.fakeUser)
+                users.add(User.fakeUser)
             }
+            cached.value = users
         }
-        return cached
+        cached
     }
 
     override suspend fun login(username: String, password: String): User? {
         delay(1000)
         return User.fakeUser.apply {
-            fullname = "Anderson Lameck"
+            name = "Anderson Lameck Msangya"
             this.username = "andylamax"
-            permits.apply {
-                add(":dev")
-            }
+            permits += ":dev"
         }
     }
 
@@ -59,7 +60,7 @@ class ClientUserDao private constructor(private val config: DataSourceConfig) : 
         return true
     }
 
-    override suspend fun delete(user: User):Boolean {
+    override suspend fun delete(user: User): Boolean {
         delay(1000)
         cached.remove(user)
         return true

@@ -4,13 +4,7 @@ import com.asofttz.auth.User
 import com.asofttz.theme.Theme
 import kotlinext.js.require
 import kotlinx.css.*
-import kotlinx.css.properties.boxShadow
-import kotlinx.html.HTMLTag
-import kotlinx.html.SVG
-import kotlinx.html.classes
-import kotlinx.html.id
 import react.RBuilder
-import react.dom.tag
 import styled.*
 
 fun RBuilder.user(user: User, theme: Theme) = styledDiv {
@@ -51,7 +45,7 @@ fun RBuilder.user(user: User, theme: Theme) = styledDiv {
             css {
                 whiteSpace = WhiteSpace.nowrap
             }
-            +user.fullname
+            +user.name
         }
 
         styledSpan {

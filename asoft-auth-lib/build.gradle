@@ -20,7 +20,7 @@ repositories {
     maven { url 'https://kotlin.bintray.com/ktor' }
     mavenCentral()
 }
-group 'auth.asofttz.com'
+group 'com.asofttz'
 version '4.0.0'
 
 apply plugin: 'maven-publish'
@@ -97,6 +97,7 @@ kotlin {
                 implementation project(":asoft-persist")
             }
         }
+        
         jsTest {
             dependencies {
                 implementation kotlin('test-js')

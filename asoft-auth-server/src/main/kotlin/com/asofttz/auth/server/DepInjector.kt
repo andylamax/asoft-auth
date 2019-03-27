@@ -43,5 +43,5 @@ object injection {
 
     private val authRepo = UserRepo.getInstance(userDao)
 
-    val authViewModal = AuthViewModal(authRepo)
+    val authViewModal get() = AuthViewModal(authRepo)
 }

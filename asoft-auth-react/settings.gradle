@@ -19,9 +19,5 @@ pluginManagement {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
 }
-rootProject.name = 'self-framework'
-include(":self-framework")
-include(":asoft-date")
-include(":asoft-theme")
-include(":self-ui:self-ui-theme")
+rootProject.name = 'asoft-auth-react'
 

@@ -11,15 +11,15 @@ import kotlinx.serialization.json.JSON
 
 @Serializable
 @NodeEntity
-class User {
+open class User {
     @Id
     @GeneratedValue
     var id: Long? = null
-    var fullname = ""
+    var name = ""
     var username = ""
-    var permits = mutableListOf(":settings", ":logs")
-    var emails = mutableListOf<String>()
-    var phones = mutableListOf<String>()
+    var permits = arrayOf(":settings", ":logs")
+    var emails = arrayOf<String>()
+    var phones = arrayOf<String>()
     var gender: Gender = Gender.Male
     var profilePic: String = ""
     var isBlocked = false
@@ -57,15 +57,14 @@ class User {
     fun clone(): User = JSON.parse(User.serializer(), JSON.stringify(User.serializer(), this))
 
     companion object {
-        private val fakeNames = mutableListOf("Raiden", "Anderson", "Hanzo", "Lameck", "Hasashi", "Kenshi", "Takeda", "Jackson", "Sonya", "Tremor", "Kotal", "Khan", "Cassie", "Johnny", "Cage", "Kabal", "Enenra", "Cyrax", "Sektor", "Jean", "T'Challa", "T'Chaka", "Okoye", "Wakabi")
-        private val mailProviders = mutableListOf("google.com", "yahoo.com", "mail.com", "people.com", "asofttz.com")
+        private val mailProviders = arrayOf("google.com", "yahoo.com", "mail.com", "people.com", "asofttz.com")
         val fakeUser: User
             get() = User().apply {
-                val fName = fakeNames.random()
-                fullname = "$fName ${fakeNames.random()}"
-                username = fName.toLowerCase()
-                emails.add(fullname.replace(" ", "").toLowerCase() + "@" + mailProviders.random().replace(",", ""))
-                phones.add("+255 752 748 674")
+                name = Name.fakeName
+                username = name.asName().first.toLowerCase()
+                val email = "${name.asName().last.replace("'", "")}.${name.asName().first.replace("'", "")}@${mailProviders.random()}".toLowerCase()
+                emails += email
+                phones += "255752748674"
             }
     }
 }
