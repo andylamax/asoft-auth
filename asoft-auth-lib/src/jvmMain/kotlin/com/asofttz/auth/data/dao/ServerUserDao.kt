@@ -6,10 +6,10 @@ import com.asofttz.rx.ObservableList
 import org.neo4j.ogm.config.Configuration
 import org.neo4j.ogm.session.SessionFactory
 
-class ServerUserDao private constructor(config: DataSourceConfig) : UserDao() {
+class ServerUserDao private constructor(config: DataSourceConfig) : UserAbstractDao() {
     companion object {
-        private var instance: UserDao? = null
-        fun getInstance(config: DataSourceConfig): UserDao {
+        private var instance: UserAbstractDao? = null
+        fun getInstance(config: DataSourceConfig): UserAbstractDao {
             synchronized(this) {
                 if (instance == null) {
                     instance = ServerUserDao(config)

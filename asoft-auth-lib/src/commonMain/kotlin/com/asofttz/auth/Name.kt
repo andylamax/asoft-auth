@@ -27,8 +27,10 @@ inline class Name(private val value: String = "") {
 
     val firstLast get() = "$first $last"
 
+    fun formated() : String = value.toLowerCase().split(" ").joinToString(" ") { it.capitalize() }
+
     companion object {
-        private val fakeNames = arrayOf("Raiden", "Anderson", "Hanzo", "Lameck", "Hasashi", "Kenshi", "Takeda", "Jackson", "Sonya", "Tremor", "Kotal", "Khan", "Cassie", "Johnny", "Cage", "Kabal", "Enenra", "Cyrax", "Sektor", "Jean", "T'Challa", "T'Chaka", "Okoye", "Wakabi")
+        val fakeNames = arrayOf("Raiden", "Anderson", "Hanzo", "Lameck", "Hasashi", "Kenshi", "Takeda", "Jackson", "Sonya", "Tremor", "Kotal", "Khan", "Cassie", "Johnny", "Cage", "Kabal", "Enenra", "Cyrax", "Sektor", "Jean", "T'Challa", "T'Chaka", "Okoye", "Wakabi")
         val fakeName
             get() = if (arrayOf(2, 3).random() == 2) {
                 "${fakeNames.random()} ${fakeNames.random()}"

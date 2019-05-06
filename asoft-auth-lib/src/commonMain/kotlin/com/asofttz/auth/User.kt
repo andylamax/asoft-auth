@@ -16,6 +16,7 @@ open class User {
     @GeneratedValue
     var id: Long? = null
     var name = ""
+    var password = ""
     var username = ""
     var permits = arrayOf(":settings", ":logs")
     var emails = arrayOf<String>()
@@ -57,11 +58,14 @@ open class User {
     fun clone(): User = JSON.parse(User.serializer(), JSON.stringify(User.serializer(), this))
 
     companion object {
+        var lastId = 0L
         private val mailProviders = arrayOf("google.com", "yahoo.com", "mail.com", "people.com", "asofttz.com")
         val fakeUser: User
             get() = User().apply {
+                id = ++lastId
                 name = Name.fakeName
                 username = name.asName().first.toLowerCase()
+                password = "1234"
                 val email = "${name.asName().last.replace("'", "")}.${name.asName().first.replace("'", "")}@${mailProviders.random()}".toLowerCase()
                 emails += email
                 phones += "255752748674"

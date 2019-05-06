@@ -1,7 +1,7 @@
 package com.asofttz.auth.server
 
 import com.asofttz.auth.data.dao.ServerUserDao
-import com.asofttz.auth.data.dao.UserDao
+import com.asofttz.auth.data.dao.UserAbstractDao
 import com.asofttz.auth.data.repo.UserRepo
 import com.asofttz.auth.data.viewmodal.AuthViewModal
 import com.asofttz.logging.Logger
@@ -39,7 +39,7 @@ object injection {
         }
     }
 
-    private val userDao: UserDao = ServerUserDao.getInstance(config)
+    private val userDao: UserAbstractDao = ServerUserDao.getInstance(config)
 
     private val authRepo = UserRepo.getInstance(userDao)
 

@@ -1,1 +1,0 @@
-config.module.rules.push({test: /\.(jpe?g|png|gif|svg)$/i, loader: "file-loader?name=app/images/[name].[ext]"});

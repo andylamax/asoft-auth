@@ -6,11 +6,11 @@ import com.asofttz.rx.ObservableList
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
-class ClientUserDao private constructor(private val config: DataSourceConfig) : UserDao() {
+class ClientUserDao private constructor(private val config: DataSourceConfig) : UserAbstractDao() {
 
     companion object {
-        private var instance: UserDao? = null
-        fun getInstance(config: DataSourceConfig): UserDao {
+        private var instance: UserAbstractDao? = null
+        fun getInstance(config: DataSourceConfig): UserAbstractDao {
             if (instance == null) {
                 instance = ClientUserDao(config)
             }
@@ -31,7 +31,7 @@ class ClientUserDao private constructor(private val config: DataSourceConfig) : 
 
     override suspend fun load(id: Int): User? {
         delay(1000)
-        return cached.value.getOrNull(id)
+        return cached.value.firstOrNull { it.id == id.toLong() }
     }
 
     override suspend fun loadAll(): ObservableList<User> = coroutineScope {
@@ -48,10 +48,8 @@ class ClientUserDao private constructor(private val config: DataSourceConfig) : 
 
     override suspend fun login(username: String, password: String): User? {
         delay(1000)
-        return User.fakeUser.apply {
-            name = "Anderson Lameck Msangya"
-            this.username = "andylamax"
-            permits += ":dev"
+        return loadAll().value.firstOrNull {
+            it.username == username && it.password == password
         }
     }
 
