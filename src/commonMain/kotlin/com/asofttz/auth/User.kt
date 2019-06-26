@@ -1,24 +1,21 @@
 package com.asofttz.auth
 
-import com.asofttz.auth.neo4j.GeneratedValue
-import com.asofttz.auth.neo4j.Id
-import com.asofttz.auth.neo4j.NodeEntity
 import com.asofttz.date.Date
 import com.asofttz.date.DateFactory
 import com.asofttz.date.DateSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 
 @Serializable
-@NodeEntity
 open class User {
-    @Id
-    @GeneratedValue
     var id: Long? = null
+    var uid: String = ""
     var name = ""
     var password = ""
     var username = ""
     var permits = arrayOf(":settings", ":logs")
+    var scopes = arrayOf<String>()
     var emails = arrayOf<String>()
     var phones = arrayOf<String>()
     var gender: Gender = Gender.Male
@@ -55,7 +52,7 @@ open class User {
         return hasPerms
     }
 
-    fun clone(): User = JSON.parse(User.serializer(), JSON.stringify(User.serializer(), this))
+    fun clone(): User = Json.parse(serializer(), Json.stringify(serializer(), this))
 
     companion object {
         var lastId = 0L
