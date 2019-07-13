@@ -16,6 +16,7 @@ import tz.co.asoft.auth.tools.phone.Phone
 open class User {
     @Id
     @GeneratedValue
+    var id: Long? = null
     var uid = ""
     var name = ""
     var password = ""
