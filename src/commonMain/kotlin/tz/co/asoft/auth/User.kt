@@ -25,19 +25,14 @@ open class User {
     var scopes = mutableListOf<String>()
     var emails = mutableListOf<String>()
     var phones = mutableListOf<String>()
-    var gender = Gender.Male.name
     var photoUrl: String = ""
-    var isBlocked = false
+    var status = Status.SignedIn.name
 
     var registeredOn = DateTime.nowUnixLong()
 
     var lastSeen = DateTime.nowUnixLong()
 
     var lastModified = DateTime.nowUnixLong()
-
-    enum class Gender {
-        Male, Female
-    }
 
     fun hasPermit(perm: String): Boolean {
         if (permits.contains(":dev")) {
@@ -56,17 +51,20 @@ open class User {
         return hasPerms
     }
 
-    @Deprecated("Try not to use this method at all", ReplaceWith("Nothing at the moment"))
-    fun clone(): User = Json.parse(serializer(), Json.stringify(serializer(), this))
+    enum class Status {
+        Blocked,
+        SignedIn,
+        SignedOut
+    }
 
     companion object {
         val fake
             get() = User().apply {
                 uid = ""
                 name = Name.fake
-                gender = Gender.values().random().name
                 username = name.asName().first.toLowerCase()
-                password = "1234"
+                password = "123456"
+                status = Status.values().random().name
                 emails.add(Email.fake(name))
                 phones.add(Phone.fake)
             }

@@ -4,6 +4,7 @@ buildscript {
         serialization_version = "0.11.1"
         klock_version = "1.5.0"
         neo4j_version = "3.1.2"
+        persist_version = "2.1.0"
     }
 
     repositories {
@@ -29,7 +30,7 @@ tasks.whenTaskAdded { task ->
 }
 
 group 'tz.co.asoft'
-version '2.1.0'
+version '3.0.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
@@ -113,8 +114,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation kotlin('stdlib-common')
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-                implementation "com.soywiz.korlibs.klock:klock-metadata:$klock_version"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
+                api "com.soywiz.korlibs.klock:klock-metadata:$klock_version"
+                api "com.github.andylamax.asoft-persist:asoft-persist-metadata:$persist_version"
             }
         }
 
@@ -128,7 +130,7 @@ kotlin {
         jvmCommonMain {
             dependencies {
                 implementation kotlin('stdlib-jdk8')
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
             }
         }
 
@@ -143,8 +145,9 @@ kotlin {
         jvmMain {
             dependsOn jvmCommonMain
             dependencies {
-                implementation "com.soywiz.korlibs.klock:klock-jvm:$klock_version"
-                implementation "org.neo4j:neo4j-ogm-core:$neo4j_version"
+                api "com.soywiz.korlibs.klock:klock-jvm:$klock_version"
+                api "org.neo4j:neo4j-ogm-core:$neo4j_version"
+                api "com.github.andylamax.asoft-persist:asoft-persist-jvm:$persist_version"
             }
         }
 
@@ -156,15 +159,17 @@ kotlin {
         androidMain {
             dependsOn jvmCommonMain
             dependencies {
-                implementation "com.soywiz.korlibs.klock:klock-android:$klock_version"
+                api "com.soywiz.korlibs.klock:klock-android:$klock_version"
+                api "com.github.andylamax.asoft-persist:asoft-persist-android:$persist_version"
             }
         }
 
         jsMain {
             dependencies {
                 implementation kotlin('stdlib-js')
-                implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
-                implementation "com.soywiz.korlibs.klock:klock-js:$klock_version"
+                api "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
+                api "com.soywiz.korlibs.klock:klock-js:$klock_version"
+                api "com.github.andylamax.asoft-persist:asoft-persist-js:$persist_version"
             }
         }
 
