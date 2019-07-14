@@ -2,14 +2,13 @@ package tz.co.asoft.auth
 
 import com.soywiz.klock.DateTime
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import tz.co.asoft.auth.tools.db.neo4j.GeneratedValue
-import tz.co.asoft.auth.tools.db.neo4j.Id
-import tz.co.asoft.auth.tools.db.neo4j.NodeEntity
 import tz.co.asoft.auth.tools.email.Email
 import tz.co.asoft.auth.tools.name.Name
 import tz.co.asoft.auth.tools.name.asName
 import tz.co.asoft.auth.tools.phone.Phone
+import tz.co.asoft.neo4j.annotations.GeneratedValue
+import tz.co.asoft.neo4j.annotations.Id
+import tz.co.asoft.neo4j.annotations.NodeEntity
 
 @Serializable
 @NodeEntity
