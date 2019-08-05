@@ -1,4 +1,4 @@
-package tz.co.asoft.auth.data.dao
+package tz.co.asoft.auth.dao
 
 import tz.co.asoft.auth.User
 

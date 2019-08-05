@@ -1,11 +1,11 @@
-package tz.co.asoft.auth.data.repo
+package tz.co.asoft.auth.repo
 
 import tz.co.asoft.auth.User
 import tz.co.asoft.persist.repo.PaginatedRepo
 import tz.co.asoft.rx.observers.Observable
 import tz.co.asoft.rx.subscriber.Subscriber
-import tz.co.asoft.auth.data.dao.AuthAbstractDao
-import tz.co.asoft.auth.data.dao.AuthAbstractLocalDao
+import tz.co.asoft.auth.dao.AuthAbstractDao
+import tz.co.asoft.auth.dao.AuthAbstractLocalDao
 
 abstract class AuthAbstractRepo(
         private val dao: AuthAbstractDao,
@@ -21,6 +21,8 @@ abstract class AuthAbstractRepo(
     suspend fun phoneSignIn(phone: String, pwd: String) = dao.phoneSignIn(phone, pwd).also {
         onSignIn(it)
     }
+
+    suspend fun uploadPhoto(user: User, photoRef: Any) = dao.uploadPhoto(user, photoRef)
 
     private suspend fun onSignIn(user: User?) {
         currentUser.value = user

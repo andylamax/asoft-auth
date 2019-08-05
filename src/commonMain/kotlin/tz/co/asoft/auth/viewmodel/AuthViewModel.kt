@@ -1,12 +1,12 @@
-package tz.co.asoft.auth.data.viewmodel
+package tz.co.asoft.auth.viewmodel
 
 import tz.co.asoft.auth.User
 import tz.co.asoft.persist.tools.Lockable
 import tz.co.asoft.persist.viewmodel.ViewModel
-import tz.co.asoft.auth.data.repo.AuthAbstractRepo
+import tz.co.asoft.auth.repo.AuthAbstractRepo
 
 open class AuthViewModel(private val repo: AuthAbstractRepo) : ViewModel<User>(repo),
-    Lockable {
+        Lockable {
     final override var isRunning = false
 
     enum class SignInType {
@@ -24,6 +24,8 @@ open class AuthViewModel(private val repo: AuthAbstractRepo) : ViewModel<User>(r
             SignInType.phone -> phoneSignIn(loginId, pwd)
         }
     }
+
+    suspend fun uploadPhoto(user: User, photoRef: Any) = repo.uploadPhoto(user, photoRef)
 
     suspend fun emailSignIn(email: String, pwd: String) = repo.emailSignIn(email, pwd)
     suspend fun phoneSignIn(phone: String, pwd: String) = repo.phoneSignIn(phone, pwd)
