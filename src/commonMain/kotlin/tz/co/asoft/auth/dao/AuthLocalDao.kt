@@ -2,7 +2,6 @@ package tz.co.asoft.auth.dao
 
 import kotlinx.serialization.json.Json
 import tz.co.asoft.auth.User
-import tz.co.asoft.persist.lock.Lock
 import tz.co.asoft.persist.storage.Storage
 
 open class AuthLocalDao private constructor(ctx: Any, name: String) : AuthAbstractLocalDao() {
@@ -11,7 +10,6 @@ open class AuthLocalDao private constructor(ctx: Any, name: String) : AuthAbstra
 
     companion object {
         private var instance: AuthAbstractLocalDao? = null
-        private val lock = Lock()
         /**
          * It is advices to use auth package name for this one
          */

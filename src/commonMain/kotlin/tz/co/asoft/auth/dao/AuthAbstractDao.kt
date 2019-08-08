@@ -8,5 +8,5 @@ abstract class AuthAbstractDao : PaginatedDao<User>() {
     abstract suspend fun uploadPhoto(user: User, photoRef: Any): User?
     abstract suspend fun emailSignIn(email: String, pwd: String): User?
     abstract suspend fun phoneSignIn(phone: String, pwd: String): User?
-    abstract suspend fun signOut(): User?
+    abstract suspend fun signOut(user: User): User?
 }

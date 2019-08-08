@@ -5,8 +5,8 @@
       <configuration version="3" platform="JavaScript " useProjectSettings="false" isTestModule="true" externalProjectId="asoft-auth">
         <sourceSets>
           <sourceSet>tz.co.asoft.asoft-auth.commonMain</sourceSet>
-          <sourceSet>tz.co.asoft.asoft-auth.jsMain</sourceSet>
           <sourceSet>tz.co.asoft.asoft-auth.commonTest</sourceSet>
+          <sourceSet>tz.co.asoft.asoft-auth.jsMain</sourceSet>
         </sourceSets>
         <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <compilerSettings />
