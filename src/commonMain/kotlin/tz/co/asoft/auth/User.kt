@@ -6,17 +6,18 @@ import tz.co.asoft.auth.tools.email.Email
 import tz.co.asoft.auth.tools.name.Name
 import tz.co.asoft.auth.tools.name.asName
 import tz.co.asoft.auth.tools.phone.Phone
+import tz.co.asoft.neo4j.Neo4JEntity
 import tz.co.asoft.neo4j.annotations.GeneratedValue
 import tz.co.asoft.neo4j.annotations.Id
 import tz.co.asoft.neo4j.annotations.NodeEntity
 
 @Serializable
 @NodeEntity
-open class User {
+open class User : Neo4JEntity{
     @Id
     @GeneratedValue
-    var id: Long? = null
-    var uid = ""
+    override var id: Long? = null
+    override var uid = ""
     var name = ""
     var password = ""
     var username = ""

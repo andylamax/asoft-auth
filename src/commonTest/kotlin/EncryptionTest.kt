@@ -7,7 +7,7 @@ class EncryptionTest {
 
     @Test
     fun shouldEncrypt() {
-        var str = "andylamax1"
+        var str = "andylamax"
         var encrypted = SHA256.digest(str.toUtf8Bytes()).hex
         println("Original: $str, Encoded: $encrypted")
 
