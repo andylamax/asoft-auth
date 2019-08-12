@@ -4,7 +4,7 @@ buildscript {
         serialization_version = "0.11.1"
         klock_version = "1.5.0"
         asoft_neo4j_version = "1.1.0"
-        persist_version = "2.4.0"
+        persist_version = "2.5.0"
         krypto_version = "1.5.0"
     }
 
@@ -31,7 +31,7 @@ tasks.whenTaskAdded { task ->
 }
 
 group 'tz.co.asoft'
-version '5.1.0'
+version '5.2.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
