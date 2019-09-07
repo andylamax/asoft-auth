@@ -14,7 +14,7 @@ abstract class AuthAbstractRepo(
         private val localDao: AuthAbstractLocalDao?
 ) : PaginatedRepo<User>(dao) {
 
-    protected var currentUser = Observable<User?>(null)
+    var currentUser = Observable<User?>(null)
 
     open suspend fun emailSignIn(email: String, pwd: String) = dao.emailSignIn(email, pwd).also {
         onSignIn(it)
@@ -41,11 +41,11 @@ abstract class AuthAbstractRepo(
         }
     }
 
-    open suspend fun userWithEmailExists(emails: List<String>) = loadAll().value.any { user ->
+    open suspend fun userWithEmailExists(emails: List<String>) = all().any { user ->
         user.emails.any { emails.contains(it) }
     }
 
-    open suspend fun userWithPhoneExists(phones: List<String>) = loadAll().value.any { user ->
+    open suspend fun userWithPhoneExists(phones: List<String>) = all().any { user ->
         user.phones.any { phones.contains(it) }
     }
 

@@ -1,13 +1,10 @@
 package tz.co.asoft.auth.viewmodel
 
-import kotlinx.coroutines.Job
 import tz.co.asoft.auth.User
-import tz.co.asoft.persist.tools.Lockable
-import tz.co.asoft.persist.viewmodel.ViewModel
 import tz.co.asoft.auth.repo.AuthAbstractRepo
 import tz.co.asoft.persist.viewmodel.PaginatedViewModel
 
-open class AuthViewModel(parentJob: Job? = null, private val repo: AuthAbstractRepo) : PaginatedViewModel<User>(parentJob, repo) {
+open class AuthViewModel(private val repo: AuthAbstractRepo) : PaginatedViewModel<User>(repo) {
 
     enum class SignInType {
         email, phone

@@ -13,7 +13,7 @@ import tz.co.asoft.neo4j.annotations.NodeEntity
 
 @Serializable
 @NodeEntity
-open class User : Neo4JEntity{
+open class User : Neo4JEntity {
     @Id
     @GeneratedValue
     override var id: Long? = null
@@ -56,6 +56,8 @@ open class User : Neo4JEntity{
         SignedIn,
         SignedOut
     }
+
+    fun getRef() = UserRef(uid, name, photoUrl)
 
     companion object {
         val fake
