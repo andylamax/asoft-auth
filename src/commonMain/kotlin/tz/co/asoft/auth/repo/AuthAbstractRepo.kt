@@ -10,6 +10,7 @@ import tz.co.asoft.auth.dao.AuthAbstractDao
 import tz.co.asoft.auth.dao.AuthAbstractLocalDao
 import tz.co.asoft.persist.tools.Cause
 import tz.co.asoft.auth.exceptions.Exceptions
+import tz.co.asoft.io.file.File
 import tz.co.asoft.persist.result.Result
 import tz.co.asoft.rx.lifecycle.LifeCycle
 import tz.co.asoft.rx.lifecycle.LiveData
@@ -34,8 +35,8 @@ abstract class AuthAbstractRepo(
 
     open suspend fun phoneSignInCatching(phone: String, pwd: String) = Result.catching { phoneSignIn(phone, pwd) }
 
-    open suspend fun uploadPhoto(user: User, photoRef: Any): User? {
-        val user = dao.uploadPhoto(user, photoRef) ?: return null
+    open suspend fun uploadPhoto(user: User, photo: File): User? {
+        val user = dao.uploadPhoto(user, photo) ?: return null
         currentUser.value = user
         localDao?.apply {
             signOut()
@@ -44,7 +45,7 @@ abstract class AuthAbstractRepo(
         return user
     }
 
-    open suspend fun uploadPhotoCatching(user: User, photoRef: Any) = Result.catching { uploadPhoto(user, photoRef) }
+    open suspend fun uploadPhotoCatching(user: User, photo: File) = Result.catching { uploadPhoto(user, photo) }
 
     open suspend fun onSignIn(user: User?) {
         currentUser.value = user

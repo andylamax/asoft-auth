@@ -6,6 +6,7 @@ buildscript {
         asoft_neo4j_version = "1.1.0"
         persist_version = "3.2.2"
         krypto_version = "1.7.1"
+        asoft_io_version = "2.0.0"
     }
 
     repositories {
@@ -31,7 +32,7 @@ tasks.whenTaskAdded { task ->
 }
 
 group 'tz.co.asoft'
-version '6.0.3'
+version '7.0.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
@@ -61,14 +62,14 @@ android {
 
 repositories {
     google()
-    mavenCentral()
     jcenter()
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url "https://kotlin.bintray.com/kotlinx" }
     maven { url 'https://dl.bintray.com/kotlin/kotlin-js-wrappers' }
     maven { url 'https://dl.bintray.com/kotlinx/kotlinx' }
     maven { url "https://jitpack.io" }
-//    maven { url "https://dl.bintray.com/soywiz/soywiz" }
+    maven { url "http://dl.bintray.com/kotlin/ktor" }
+    mavenCentral()
 }
 
 
@@ -120,6 +121,7 @@ kotlin {
                 api "com.soywiz.korlibs.klock:klock-metadata:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-metadata:$persist_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-metadata:$asoft_neo4j_version"
+                api "com.github.andylamax.asoft-io:asoft-io-metadata:$asoft_io_version"
                 api "com.soywiz.korlibs.krypto:krypto-metadata:$krypto_version"
             }
         }
@@ -138,6 +140,7 @@ kotlin {
                 api "com.soywiz.korlibs.klock:klock-jvm:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-jvm:$persist_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-jvm:$asoft_neo4j_version"
+                api "com.github.andylamax.asoft-io:asoft-io-jvm:$asoft_io_version"
                 api "com.soywiz.korlibs.krypto:krypto-jvm:$krypto_version"
             }
         }
@@ -157,12 +160,17 @@ kotlin {
                 api "com.soywiz.korlibs.klock:klock-android:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-android:$persist_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-android:$asoft_neo4j_version"
+                api "com.github.andylamax.asoft-io:asoft-io-android:$asoft_io_version"
                 api "com.soywiz.korlibs.krypto:krypto-android:$krypto_version"
             }
         }
 
         androidTest {
             dependsOn androidMain
+            dependencies {
+                implementation kotlin('test')
+                implementation kotlin('test-junit')
+            }
         }
 
         jsMain {
@@ -172,6 +180,7 @@ kotlin {
                 api "com.soywiz.korlibs.klock:klock-js:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-js:$persist_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-js:$asoft_neo4j_version"
+                api "com.github.andylamax.asoft-io:asoft-io-js:$asoft_io_version"
                 api "com.soywiz.korlibs.krypto:krypto-js:$krypto_version"
             }
         }

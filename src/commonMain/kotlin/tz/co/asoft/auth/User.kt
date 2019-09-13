@@ -57,7 +57,12 @@ open class User : Neo4JEntity {
         SignedOut
     }
 
-    val ref get() = UserRef(uid, name, photoUrl)
+    val ref
+        get() = UserRef().also {
+            it.uid = uid
+            it.name = name
+            it.photoUrl = photoUrl
+        }
 
     companion object {
         val fake
