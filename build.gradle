@@ -63,13 +63,11 @@ android {
 repositories {
     google()
     jcenter()
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
     maven { url "https://kotlin.bintray.com/kotlinx" }
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-js-wrappers' }
     maven { url 'https://dl.bintray.com/kotlinx/kotlinx' }
     maven { url "https://jitpack.io" }
     maven { url "http://dl.bintray.com/kotlin/ktor" }
-    mavenCentral()
 }
 
 
