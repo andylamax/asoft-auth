@@ -64,8 +64,8 @@ abstract class AuthAbstractRepo(
     } ?: true
 
     override suspend fun create(t: User) = when {
-        userWithEmailExists(t.emails) -> throw Cause(Exceptions.UserWithSameEmailExists.name)
-        userWithPhoneExists(t.phones) -> throw  Cause(Exceptions.UserWithSamePhoneExists.name)
+        userWithEmailExists(t.emails.toList()) -> throw Cause(Exceptions.UserWithSameEmailExists.name)
+        userWithPhoneExists(t.phones.toList()) -> throw  Cause(Exceptions.UserWithSamePhoneExists.name)
         else -> super.create(t)
     }
 

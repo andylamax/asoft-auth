@@ -2,6 +2,7 @@ package tz.co.asoft.auth
 
 import com.soywiz.klock.DateTime
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.set
 import tz.co.asoft.auth.tools.email.Email
 import tz.co.asoft.auth.tools.name.Name
 import tz.co.asoft.auth.tools.name.asName
@@ -21,10 +22,10 @@ open class User : Neo4JEntity {
     var name = ""
     var password = ""
     var username = ""
-    var permits = mutableListOf(":settings", ":logs", ":profile")
-    var scopes = mutableListOf<String>()
-    var emails = mutableListOf<String>()
-    var phones = mutableListOf<String>()
+    var permits = mutableSetOf(":settings", ":logs", ":profile")
+    var scopes = mutableSetOf<String>()
+    var emails = mutableSetOf<String>()
+    var phones = mutableSetOf<String>()
     var photoUrl: String = ""
     var status = Status.SignedIn.name
 
@@ -41,7 +42,9 @@ open class User : Neo4JEntity {
         return permits.indexOfFirst { it == perm } >= 0
     }
 
-    fun hasPermits(perms: Array<String>): Boolean {
+    fun hasPermits(perms: Array<String>) = hasPermits(perms.toSet())
+
+    fun hasPermits(perms: Collection<String>): Boolean {
         var hasPerms = false
         perms.forEach { perm ->
             hasPerms = hasPermit(perm)
