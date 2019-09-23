@@ -3,8 +3,9 @@ package tz.co.asoft.auth.dao
 import kotlinx.serialization.json.Json
 import tz.co.asoft.auth.User
 import tz.co.asoft.persist.storage.Storage
+import tz.co.asoft.platform.Ctx
 
-open class AuthLocalDao private constructor(ctx: Any, name: String) : AuthAbstractLocalDao() {
+open class AuthLocalDao private constructor(ctx: Ctx, name: String) : AuthAbstractLocalDao() {
 
     private val db = Storage(ctx, name)
 
@@ -13,7 +14,7 @@ open class AuthLocalDao private constructor(ctx: Any, name: String) : AuthAbstra
         /**
          * It is advices to use auth package name for this one
          */
-        fun getInstance(ctx: Any, name: String) = instance ?: AuthLocalDao(ctx, name).also {
+        fun getInstance(ctx: Ctx, name: String) = instance ?: AuthLocalDao(ctx, name).also {
             instance = it
         }
     }
