@@ -4,7 +4,8 @@ import tz.co.asoft.auth.User
 import tz.co.asoft.persist.repo.Repo
 import tz.co.asoft.persist.result.Result
 
-open class CreateAdminUseCase(private val repo: Repo<User>) {
+open class CreateAdminUseCase(private val registerUserUC: IRegisterUserUseCase) {
+    
     private val admin = User().apply {
         name = "System Admin"
         emails.add("admin@admin.com")
@@ -14,7 +15,5 @@ open class CreateAdminUseCase(private val repo: Repo<User>) {
         permits.add(":dev")
     }
 
-    suspend operator fun invoke() = Result.catching {
-        repo.create(admin)
-    }
+    suspend operator fun invoke() = registerUserUC(admin)
 }
