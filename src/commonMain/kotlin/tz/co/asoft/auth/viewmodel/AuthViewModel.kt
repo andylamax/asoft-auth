@@ -21,5 +21,5 @@ open class AuthViewModel(
     suspend fun uploadPhoto(user: User, photo: File) = uploadPhotoUC(user, photo)
     suspend fun signOut() = signOutUC()
     suspend fun onAuthStateChanged(lifeCycle: LifeCycle, handler: (User?) -> Unit) = authStateUC.onAuthStateChanged(lifeCycle, handler)
-    suspend fun createUser(user: User) = registerUserUC(user)
+    suspend fun registerUser(user: User) = registerUserUC(user)
 }
