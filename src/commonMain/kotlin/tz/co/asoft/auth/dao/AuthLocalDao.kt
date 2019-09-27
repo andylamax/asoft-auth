@@ -29,7 +29,7 @@ open class AuthLocalDao private constructor(ctx: Ctx, name: String) : AuthAbstra
         return Json.parse(serializer, json)
     }
 
-    override suspend fun signOut() {
+    override suspend fun delete() {
         db.clear()
     }
 }

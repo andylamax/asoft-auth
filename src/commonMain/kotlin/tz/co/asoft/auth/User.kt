@@ -22,10 +22,10 @@ open class User : Neo4JEntity {
     var name = ""
     var password = ""
     var username = ""
-    var permits = mutableSetOf(":settings", ":logs", ":profile")
-    var scopes = mutableSetOf<String>()
-    var emails = mutableSetOf<String>()
-    var phones = mutableSetOf<String>()
+    var permits = mutableListOf(":settings", ":logs", ":profile")
+    var scopes = mutableListOf<String>()
+    var emails = mutableListOf<String>()
+    var phones = mutableListOf<String>()
     var photoUrl: String = ""
     var status = Status.SignedIn.name
 
