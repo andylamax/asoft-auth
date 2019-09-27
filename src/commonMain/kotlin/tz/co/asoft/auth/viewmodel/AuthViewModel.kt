@@ -10,7 +10,7 @@ import tz.co.asoft.rx.lifecycle.LifeCycle
 open class AuthViewModel(
         repo: Repo<User>,
         private val createAdminUC: CreateAdminUseCase,
-        private val registerUserUC: RegisterUserUseCase,
+        private val registerUserUC: IRegisterUserUseCase,
         private val signInUC: SignInUseCase,
         private val authStateUC: AuthStateUseCase,
         private val signOutUC: SignOutUseCase,
