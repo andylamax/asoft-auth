@@ -15,13 +15,17 @@ open class RegisterUserUseCase(
 ) : IRegisterUserUseCase {
     override suspend operator fun invoke(u: User): Result<User> {
         val pwd = u.password
-        u.password = SHA256.digest(u.password.toUtf8Bytes()).hex
-        if (repo is IAuthRepo) {
-            if (repo.userWithEmailExists(u.emails)) throw emailExists()
-            if (repo.userWithPhoneExists(u.emails)) throw phoneExists()
+        return try {
+            u.password = SHA256.digest(u.password.toUtf8Bytes()).hex
+            if (repo is IAuthRepo) {
+                if (repo.userWithEmailExists(u.emails)) throw emailExists()
+                if (repo.userWithPhoneExists(u.emails)) throw phoneExists()
+            }
+            repo.create(u) ?: throw cause(u)
+            signInUC(u.emails.first(), pwd)
+        } catch (c: Cause) {
+            Result.failure(c)
         }
-        repo.create(u) ?: throw cause(u)
-        return signInUC(u.emails.first(), pwd)
     }
 
     private fun cause(u: User) = Cause("Failed to store ${u.name}'s info")

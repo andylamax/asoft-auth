@@ -1,7 +1,5 @@
 package tz.co.asoft.auth.usecase
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import tz.co.asoft.auth.User
 
 open class SignOutUseCase(
@@ -9,9 +7,9 @@ open class SignOutUseCase(
         private val updateStatusUC: UpdateStatusUseCase
 ) {
 
-    suspend operator fun invoke() = coroutineScope {
-        val user = authStateUC.liveUser.value ?: return@coroutineScope
+    operator fun invoke() {
+        val user = authStateUC.liveUser.value ?: return
         authStateUC.liveUser.value = null
-        launch { updateStatusUC(user, User.Status.SignedOut) }
+        updateStatusUC(user, User.Status.SignedOut)
     }
 }

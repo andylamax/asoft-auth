@@ -19,7 +19,7 @@ open class AuthViewModel(
     suspend fun createAdmin() = createAdminUC()
     suspend fun signIn(loginId: String, pwd: String) = signInUC(loginId, pwd)
     suspend fun uploadPhoto(user: User, photo: File) = uploadPhotoUC(user, photo)
-    suspend fun signOut() = signOutUC()
+    fun signOut() = signOutUC()
     suspend fun onAuthStateChanged(lifeCycle: LifeCycle, handler: (User?) -> Unit) = authStateUC.onAuthStateChanged(lifeCycle, handler)
     suspend fun registerUser(user: User) = registerUserUC(user)
 }
