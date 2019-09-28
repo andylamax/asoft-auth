@@ -1,4 +1,4 @@
-package tz.co.asoft.auth.usecase
+package tz.co.asoft.auth.usecase.registeruser
 
 import tz.co.asoft.auth.User
 import tz.co.asoft.persist.result.Result

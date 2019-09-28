@@ -33,6 +33,10 @@ class AuthRepo(private val dao: Dao<User>, private val localDao: AuthAbstractLoc
     override suspend fun saveToLocal(u: User) = u.saveToLocalDb()
     override suspend fun loadLocalUser() = localDao?.load()
 
+    override suspend fun removeLocal() {
+        localDao?.delete()
+    }
+
     override suspend fun userWithEmailExists(emails: List<String>): Boolean = all()?.any { user ->
         user.emails.any { emails.contains(it) }
     } ?: true

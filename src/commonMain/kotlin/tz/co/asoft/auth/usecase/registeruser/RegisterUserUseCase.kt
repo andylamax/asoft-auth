@@ -1,17 +1,18 @@
-package tz.co.asoft.auth.usecase
+package tz.co.asoft.auth.usecase.registeruser
 
 import com.soywiz.krypto.SHA256
 import kotlinx.serialization.toUtf8Bytes
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IAuthRepo
 import tz.co.asoft.auth.tools.hex.hex
+import tz.co.asoft.auth.usecase.signin.ISignInUseCase
 import tz.co.asoft.persist.repo.Repo
 import tz.co.asoft.persist.result.Result
 import tz.co.asoft.persist.tools.Cause
 
 open class RegisterUserUseCase(
         private val repo: Repo<User>,
-        private val signInUC: SignInUseCase
+        private val signInUC: ISignInUseCase
 ) : IRegisterUserUseCase {
     override suspend operator fun invoke(u: User): Result<User> {
         val pwd = u.password
