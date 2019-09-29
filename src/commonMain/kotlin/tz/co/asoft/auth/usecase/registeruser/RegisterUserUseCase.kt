@@ -17,7 +17,7 @@ open class RegisterUserUseCase(private val repo: Repo<User>) : IRegisterUserUseC
             u.password = SHA256.digest(u.password.toUtf8Bytes()).hex
             if (repo is IAuthRepo) {
                 if (repo.userWithEmailExists(u.emails)) throw emailExists()
-                if (repo.userWithPhoneExists(u.emails)) throw phoneExists()
+                if (repo.userWithPhoneExists(u.phones)) throw phoneExists()
             }
             repo.createCatching(u)
         } catch (c: Cause) {
