@@ -1,6 +1,7 @@
 package tz.co.asoft.auth.viewmodel
 
 import tz.co.asoft.auth.User
+import tz.co.asoft.auth.UserRef
 import tz.co.asoft.auth.repo.IAuthRepo
 import tz.co.asoft.auth.usecase.authstate.AuthStateUseCase
 import tz.co.asoft.auth.usecase.authstate.IAuthStateUseCase
@@ -49,4 +50,5 @@ open class AuthViewModel(
     suspend fun registerUserAndSignIn(user: User) = registerUserAndSignInUC(user)
     suspend fun deleteUser(email: String, pwd: String) = deleteUserUC(email, pwd)
     suspend fun loadUser(email: String, pwd: String) = loadUserUC(email, pwd)
+    suspend fun loadUser(ref: UserRef) = loadUserUC(ref)
 }
