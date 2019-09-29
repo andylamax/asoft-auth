@@ -5,7 +5,9 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.serialization.toUtf8Bytes
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IAuthRepo
+import tz.co.asoft.auth.Email
 import tz.co.asoft.auth.tools.hex.hex
+import tz.co.asoft.auth.Phone
 import tz.co.asoft.auth.usecase.authstate.IAuthStateUseCase
 import tz.co.asoft.auth.usecase.updatestatus.IUpdateStatusUseCase
 import tz.co.asoft.persist.result.Result
@@ -28,13 +30,9 @@ open class SignInUseCase(
         }
         Result.catching {
             when (type) {
-                SignInType.email -> repo.emailSignIn(loginId, password)
-                SignInType.phone -> repo.phoneSignIn(loginId, password)
-            }?.also {
-                updateStatusUC(it, User.Status.SignedIn)
-            }
-        }.also {
-            authStateUC.liveUser.value = it.data
-        }
+                SignInType.email -> repo.load(Email(loginId), password)
+                SignInType.phone -> repo.load(Phone(loginId), password)
+            }?.also { updateStatusUC(it, User.Status.SignedIn) }
+        }.also { res -> res.data?.let { authStateUC.liveUser.value = it } }
     }
 }

@@ -8,7 +8,7 @@ open class CreateAdminUseCase(private val registerUserUC: IRegisterUserUseCase) 
     private val admin = User().apply {
         name = "System Admin"
         emails.add("admin@admin.com")
-        phones.add("0000000000")
+        phones.add("255000000000")
         username = "administrator"
         password = "adminadmin"
         permits.add(":dev")

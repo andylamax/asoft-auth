@@ -16,7 +16,7 @@ open class SignOutUseCase(
     override operator fun invoke() {
         val user = authStateUC.liveUser.value ?: return
         authStateUC.liveUser.value = null
-        GlobalScope.launch { repo.removeLocal() }
+        GlobalScope.launch { repo.deleteLocal() }
         updateStatusUC(user, User.Status.SignedOut)
     }
 }

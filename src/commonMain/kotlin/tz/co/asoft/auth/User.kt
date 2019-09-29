@@ -2,11 +2,8 @@ package tz.co.asoft.auth
 
 import com.soywiz.klock.DateTime
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.set
-import tz.co.asoft.auth.tools.email.Email
 import tz.co.asoft.auth.tools.name.Name
 import tz.co.asoft.auth.tools.name.asName
-import tz.co.asoft.auth.tools.phone.Phone
 import tz.co.asoft.neo4j.Neo4JEntity
 import tz.co.asoft.neo4j.annotations.GeneratedValue
 import tz.co.asoft.neo4j.annotations.Id
@@ -29,11 +26,12 @@ open class User : Neo4JEntity {
     var photoUrl: String = ""
     var status = Status.SignedIn.name
 
+    var verifiedEmails = mutableListOf<String>()
+    var verifiedPhones = mutableListOf<String>()
+
     var registeredOn = DateTime.nowUnixLong()
 
     var lastSeen = DateTime.nowUnixLong()
-
-    var lastModified = DateTime.nowUnixLong()
 
     fun hasPermit(perm: String): Boolean {
         if (permits.contains(":dev")) {

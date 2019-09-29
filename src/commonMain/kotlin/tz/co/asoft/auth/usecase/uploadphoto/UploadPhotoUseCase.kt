@@ -22,11 +22,8 @@ open class UploadPhotoUseCase(
             if (repo is IAuthRepo) {
                 val user = repo.uploadPhoto(u, file) ?: throw Cause("Failed To Upload Photo")
                 authStateUC.liveUser.value = user
-                launch {
-                    repo.saveToLocal(user)
-                    repo.edit(user)
-                }
-                user
+                repo.saveToLocal(user)
+                repo.edit(user)
             } else {
                 null
             }

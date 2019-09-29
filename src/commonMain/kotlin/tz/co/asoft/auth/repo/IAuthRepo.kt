@@ -8,7 +8,7 @@ interface IAuthRepo : IAuthDao {
 
     suspend fun loadLocalUser(): User?
 
-    suspend fun removeLocal()
+    suspend fun deleteLocal()
 
     suspend fun userWithEmailExists(emails: List<String>) = false
 
