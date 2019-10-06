@@ -19,4 +19,6 @@ open class AuthStateUseCase private constructor(private val repo: IAuthRepo) : I
         }
         liveUser.observe(lifeCycle, onChange)
     }
+
+    override suspend fun currentUser(): User? = liveUser.value ?: repo.loadLocalUser()
 }

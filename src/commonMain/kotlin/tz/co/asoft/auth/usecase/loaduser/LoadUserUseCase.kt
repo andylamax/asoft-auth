@@ -12,17 +12,15 @@ import tz.co.asoft.persist.repo.Repo
 import tz.co.asoft.persist.result.Result
 import tz.co.asoft.persist.tools.Cause
 
-class LoadUserUseCase(val repo: Repo<User>) : ILoadUserUseCase {
+class LoadUserUseCase(val repo: IAuthRepo) : ILoadUserUseCase {
 
     override suspend fun invoke(loginId: String, pwd: String) = Result.catching {
-        if (repo is IAuthRepo) {
-            val xpwd = SHA256.digest(pwd.toUtf8Bytes()).hex
-            if (loginId.contains("@")) {
-                repo.load(Email(loginId), xpwd)
-            } else {
-                repo.load(Phone(loginId), xpwd)
-            }
-        } else throw Cause("Can't load user from a non IAuthRepo")
+        val xpwd = SHA256.digest(pwd.toUtf8Bytes()).hex
+        if (loginId.contains("@")) {
+            repo.load(Email(loginId), xpwd)
+        } else {
+            repo.load(Phone(loginId), xpwd)
+        }
     }
 
     override suspend fun invoke(uid: Any) = repo.loadCatching(uid)

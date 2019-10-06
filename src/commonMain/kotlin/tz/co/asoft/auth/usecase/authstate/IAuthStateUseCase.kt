@@ -8,4 +8,5 @@ import tz.co.asoft.rx.lifecycle.Observer
 interface IAuthStateUseCase {
     val liveUser: LiveData<User?>
     suspend fun onAuthStateChanged(lifeCycle: LifeCycle, onChange: (User?) -> Unit): Observer<User?>
+    suspend fun currentUser(): User?
 }

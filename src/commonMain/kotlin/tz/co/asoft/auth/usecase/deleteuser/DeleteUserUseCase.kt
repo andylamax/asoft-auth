@@ -1,15 +1,12 @@
 package tz.co.asoft.auth.usecase.deleteuser
 
 import tz.co.asoft.auth.User
-import tz.co.asoft.auth.repo.IAuthRepo
-import tz.co.asoft.auth.Email
 import tz.co.asoft.auth.usecase.loaduser.ILoadUserUseCase
-import tz.co.asoft.persist.repo.Repo
+import tz.co.asoft.persist.repo.IRepo
 import tz.co.asoft.persist.result.Result
-import tz.co.asoft.persist.tools.Cause
 
 class DeleteUserUseCase(
-        private val repo: Repo<User>,
+        private val repo: IRepo<User>,
         private val loadUserUC: ILoadUserUseCase
 ) : IDeleteUserUseCase {
 

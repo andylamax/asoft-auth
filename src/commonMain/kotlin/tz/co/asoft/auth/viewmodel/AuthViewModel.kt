@@ -24,20 +24,19 @@ import tz.co.asoft.auth.usecase.updatestatus.UpdateStatusUseCase
 import tz.co.asoft.auth.usecase.uploadphoto.IUploadPhotoUseCase
 import tz.co.asoft.auth.usecase.uploadphoto.UploadPhotoUseCase
 import tz.co.asoft.io.file.File
-import tz.co.asoft.persist.repo.Repo
 import tz.co.asoft.persist.viewmodel.ViewModel
 import tz.co.asoft.rx.lifecycle.LifeCycle
 
 open class AuthViewModel(
-        repo: Repo<User>,
-        private val authStateUC: IAuthStateUseCase = AuthStateUseCase.getInstance(repo as IAuthRepo),
+        repo: IAuthRepo,
+        private val authStateUC: IAuthStateUseCase = AuthStateUseCase.getInstance(repo),
         private val registerUserUC: IRegisterUserUseCase = RegisterUserUseCase(repo),
         private val loadUserUC: ILoadUserUseCase = LoadUserUseCase(repo),
         private val updateStatusUC: IUpdateStatusUseCase = UpdateStatusUseCase(repo),
         private val createAdminUC: ICreateAdminUseCase = CreateAdminUseCase(registerUserUC),
         private val signInUC: ISignInUseCase = SignInUseCase(loadUserUC, authStateUC, updateStatusUC),
         private val registerUserAndSignInUC: IRegisterUserAndSignInUseCase = RegisterUserAndSignInUseCase(registerUserUC, signInUC),
-        private val signOutUC: ISignOutUseCase = SignOutUseCase(repo as IAuthRepo, authStateUC, updateStatusUC),
+        private val signOutUC: ISignOutUseCase = SignOutUseCase(repo, authStateUC, updateStatusUC),
         private val uploadPhotoUC: IUploadPhotoUseCase = UploadPhotoUseCase(repo, authStateUC),
         private val deleteUserUC: IDeleteUserUseCase = DeleteUserUseCase(repo, loadUserUC)
 ) : ViewModel<User>(repo) {

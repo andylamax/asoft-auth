@@ -5,6 +5,7 @@ import tz.co.asoft.auth.User
 import tz.co.asoft.persist.dao.Dao
 import tz.co.asoft.persist.storage.Storage
 import tz.co.asoft.platform.Ctx
+import tz.co.asoft.rx.lifecycle.LiveData
 
 open class AuthLocalDao private constructor(ctx: Ctx, name: String) : Dao<User>(), IAuthLocalDao {
 
@@ -12,7 +13,7 @@ open class AuthLocalDao private constructor(ctx: Ctx, name: String) : Dao<User>(
     private val serializer = User.serializer()
 
     companion object {
-        private var instance: Dao<User>? = null
+        private var instance: IAuthLocalDao? = null
         /**
          * It is advices to use auth package name for this one
          */
@@ -32,6 +33,6 @@ open class AuthLocalDao private constructor(ctx: Ctx, name: String) : Dao<User>(
     }
 
     override suspend fun delete() {
-        db.clear()
+        db.remove("device_user")
     }
 }
