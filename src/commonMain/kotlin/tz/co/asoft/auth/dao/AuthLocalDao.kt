@@ -6,8 +6,7 @@ import tz.co.asoft.persist.dao.Dao
 import tz.co.asoft.persist.storage.Storage
 import tz.co.asoft.platform.core.Ctx
 
-open class AuthLocalDao private constructor(ctx: Ctx, name: String) : Dao<User>(), IAuthLocalDao {
-
+open class AuthLocalDao(ctx: Ctx, name: String) : Dao<User>(), IAuthLocalDao {
     private val db = Storage(ctx, name)
     private val serializer = User.serializer()
 
