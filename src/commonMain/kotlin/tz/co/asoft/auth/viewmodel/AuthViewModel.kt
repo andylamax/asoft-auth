@@ -25,6 +25,7 @@ import tz.co.asoft.auth.usecase.uploadphoto.IUploadPhotoUseCase
 import tz.co.asoft.auth.usecase.uploadphoto.UploadPhotoUseCase
 import tz.co.asoft.io.file.File
 import tz.co.asoft.persist.viewmodel.ViewModel
+import tz.co.asoft.rx.lifecycle.ILifeCycle
 import tz.co.asoft.rx.lifecycle.LifeCycle
 
 open class AuthViewModel(
@@ -44,7 +45,7 @@ open class AuthViewModel(
     suspend fun signIn(loginId: String, pwd: String) = signInUC(loginId, pwd)
     suspend fun uploadPhoto(user: User, photo: File) = uploadPhotoUC(user, photo)
     fun signOut() = signOutUC()
-    suspend fun onAuthStateChanged(lifeCycle: LifeCycle, handler: (User?) -> Unit) = authStateUC.onAuthStateChanged(lifeCycle, handler)
+    suspend fun onAuthStateChanged(lifeCycle: ILifeCycle, handler: (User?) -> Unit) = authStateUC.onAuthStateChanged(lifeCycle, handler)
     suspend fun registerUser(user: User) = registerUserUC(user)
     suspend fun registerUserAndSignIn(user: User) = registerUserAndSignInUC(user)
     suspend fun deleteUser(email: String, pwd: String) = deleteUserUC(email, pwd)
