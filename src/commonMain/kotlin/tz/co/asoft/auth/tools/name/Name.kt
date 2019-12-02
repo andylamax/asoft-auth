@@ -1,7 +1,7 @@
 package tz.co.asoft.auth.tools.name
 
-class Name(private val value: String = "") {
-    private val parts = value.split(" ")
+inline class Name(private val value: String = "") {
+    private val parts get() = value.split(" ")
 
     val full get() = value
 

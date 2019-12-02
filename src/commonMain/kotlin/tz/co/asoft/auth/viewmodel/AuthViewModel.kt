@@ -28,6 +28,7 @@ import tz.co.asoft.persist.viewmodel.ViewModel
 import tz.co.asoft.rx.lifecycle.ILifeCycle
 import tz.co.asoft.rx.lifecycle.LifeCycle
 
+@Deprecated("Use a specific view model")
 open class AuthViewModel(
         repo: IAuthRepo,
         private val authStateUC: IAuthStateUseCase = AuthStateUseCase.getInstance(repo),
