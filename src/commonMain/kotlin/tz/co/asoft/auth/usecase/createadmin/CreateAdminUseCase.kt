@@ -14,5 +14,5 @@ open class CreateAdminUseCase(private val registerUserUC: IRegisterUserUseCase) 
         permits.add(":dev")
     }
 
-    override suspend fun invoke() = registerUserUC(admin)
+    override suspend fun invoke() = registerUserUC(admin, null)
 }

@@ -23,8 +23,9 @@ open class User : Neo4JEntity {
     var scopes = mutableListOf<String>()
     var emails = mutableListOf<String>()
     var phones = mutableListOf<String>()
-    var photoUrl: String = ""
+    var photoUrl = ""
     var status = Status.SignedIn.name
+    var accounts = mutableListOf<UserAccount>()
 
     var verifiedEmails = mutableListOf<String>()
     var verifiedPhones = mutableListOf<String>()
@@ -33,37 +34,18 @@ open class User : Neo4JEntity {
 
     var lastSeen = DateTime.nowUnixLong()
 
-    fun hasPermit(perm: String): Boolean {
-        if (permits.contains(":dev")) {
-            return true
-        }
-        return permits.indexOfFirst { it == perm } >= 0
-    }
-
-    fun hasPermits(perms: Array<String>) = hasPermits(perms.toSet())
-
-    fun hasPermits(perms: Collection<String>): Boolean {
-        var hasPerms = false
-        perms.forEach { perm ->
-            hasPerms = hasPermit(perm)
-            if (hasPerms)
-                return true
-        }
-        return hasPerms
-    }
-
     enum class Status {
         Blocked,
         SignedIn,
-        SignedOut
+        SignedOut,
+        Deleted
     }
 
-    val ref
-        get() = UserRef().also {
-            it.uid = uid
-            it.name = name
-            it.photoUrl = photoUrl
-        }
+    fun ref() = UserRef().also {
+        it.uid = uid
+        it.name = name
+        it.photoUrl = photoUrl
+    }
 
     companion object {
         val fake

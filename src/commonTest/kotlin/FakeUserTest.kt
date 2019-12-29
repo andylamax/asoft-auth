@@ -13,7 +13,7 @@ class FakeUserTest {
 
     @Test
     fun canGetUserReferenceFromUser() {
-        val userRef = User.fake.ref
+        val userRef = User.fake.ref()
         println(Json.stringify(UserRef.serializer(), userRef))
     }
 }
