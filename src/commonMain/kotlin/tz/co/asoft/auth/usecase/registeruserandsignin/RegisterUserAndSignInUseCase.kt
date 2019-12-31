@@ -12,7 +12,7 @@ open class RegisterUserAndSignInUseCase(
         private val signInUC: ISignInUseCase
 ) : IRegisterUserAndSignInUseCase {
     override suspend operator fun invoke(user: User, ua: UserAccount?) = catching {
-        val pwd = user.password
+        val pwd = user.password ?: "123456"
         registerUserUC(user, ua).respond()
         signInUC(user.emails.first(), pwd).respond()
     }

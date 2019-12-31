@@ -20,7 +20,7 @@ open class RegisterUserUseCase(private val usersRepo: IUsersRepo, private val ac
         }
         val userAccount = accountsRepo.createCatching(account).respond()
         user.accounts.add(userAccount)
-        user.password = SHA256.digest(user.password.toUtf8Bytes()).hex
+        user.password = SHA256.digest((user.password ?: "123456").toUtf8Bytes()).hex
         if (usersRepo.userWithEmailExists(user.emails)) throw emailExists()
         if (usersRepo.userWithPhoneExists(user.phones)) throw phoneExists()
         usersRepo.createCatching(user).respond()

@@ -15,7 +15,7 @@ open class UploadPhotoUseCase(
     override suspend operator fun invoke(u: User, file: File) = coroutineScope {
         catching {
             val user = repo.uploadPhoto(u, file)
-            userStateUC.liveUser.send(user)
+            userStateUC.liveUser.value = user
             repo.edit(user)
         }
     }

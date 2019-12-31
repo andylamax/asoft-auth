@@ -1,10 +1,13 @@
 import di.injection
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import tz.co.asoft.auth.User
+import tz.co.asoft.logging.Logger
 import tz.co.asoft.test.AsyncTest
 import kotlin.test.*
 
+@Ignore
 class AuthenticationTest : AsyncTest() {
 
     private val users = List(23) {
@@ -19,9 +22,8 @@ class AuthenticationTest : AsyncTest() {
 
     @BeforeTest
     fun setup_users() = asyncTest {
-        log.i("Registering ${users.size} Users")
         users.forEach { user ->
-            registerUC(user, null).catch { log.e(it) }
+            registerUC(user, null).catch { println(it) }
         }
     }
 
@@ -37,22 +39,14 @@ class AuthenticationTest : AsyncTest() {
 
     @Test
     fun user_can_login() = asyncTest {
-        log.i("Signing in")
-        val listener = async {
-            for (user in userStateUC.liveUser) {
-                println("${user?.name} Logged in")
-            }
-        }
+        val user = signInUC(users.random().emails.first(), "123456").respond()
+        assertEquals(userStateUC.liveUser.value, user)
+    }
 
-        val process = async {
-            delay(1000)
-            val user = signInUC(users.random().emails.first(), "123456")
-            assertNotNull(user)
-            log.i("Finishing signing in")
-            user
-        }
-
-        listener.await(); process.await()
+    @Test
+    fun user_can_get_token() = asyncTest {
+        val user = signInUC(users.random().emails.first(), "123456").respond()
+        assertEquals(userStateUC.liveUser.value, user)
     }
 
     @AfterTest

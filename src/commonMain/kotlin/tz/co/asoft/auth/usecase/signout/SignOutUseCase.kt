@@ -14,8 +14,8 @@ open class SignOutUseCase(
 ) : ISignOutUseCase {
 
     override suspend operator fun invoke() {
-        val user = userStateUC.liveUser.value() ?: return
-        userStateUC.liveUser.send(null)
+        val user = userStateUC.liveUser.value ?: return
+        userStateUC.liveUser.value = null
         GlobalScope.launch { repo.deleteLocal() }
         updateStatusUC(user, User.Status.SignedOut)
     }

@@ -11,15 +11,17 @@ import tz.co.asoft.neo4j.annotations.NodeEntity
 
 @Serializable
 @NodeEntity
-open class User : Neo4JEntity {
+open class User : Claimer {
     @Id
     @GeneratedValue
     override var id: Long? = null
     override var uid = ""
-    var name = ""
-    var password = ""
+    override var name = ""
+    var password: String? = ""
     var username = ""
+    @Deprecated("Use permissions instead")
     var permits = mutableListOf(":settings", ":logs", ":profile")
+    var permissions = mutableListOf<Permission>()
     var scopes = mutableListOf<String>()
     var emails = mutableListOf<String>()
     var phones = mutableListOf<String>()

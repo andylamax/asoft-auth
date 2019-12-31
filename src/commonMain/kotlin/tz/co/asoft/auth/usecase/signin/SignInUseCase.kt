@@ -20,15 +20,13 @@ open class SignInUseCase(
 ) : ISignInUseCase {
     override suspend fun invoke(loginId: String, pwd: String) = catching {
         val xpwd = SHA256.digest(pwd.toUtf8Bytes()).hex
-        println("Logging in now")
         if (loginId.contains("@")) {
             repo.load(Email(loginId), xpwd)
         } else {
             repo.load(Phone(loginId), xpwd)
         }?.also {
-            userState.liveUser.send(it)
+            userState.liveUser.value = it
             updateStatusUC(it, User.Status.SignedIn)
-            println("Finished logging in")
         }
     }
 }
