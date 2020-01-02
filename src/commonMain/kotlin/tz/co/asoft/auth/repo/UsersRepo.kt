@@ -35,17 +35,18 @@ class UsersRepo(override val remoteDao: IUsersDao, override val localDao: IUsers
         user.phones.any { phones.contains(it) }
     }
 
-    override suspend fun edit(t: User): User = super.edit(t).also {
+    override suspend fun edit(t: User): User {
         if (localDao.load()?.uid == t.uid) {
             localDao.delete()
         }
+        return super.edit(t)
     }
 
-    override suspend fun delete(t: User): User = super.delete(t).also {
+    override suspend fun delete(t: User): User {
         if (localDao.load()?.uid == t.uid) {
             localDao.delete()
         }
-        super.delete(t)
+        return super.delete(t)
     }
 
     override suspend fun deleteLocal() = localDao.delete()
