@@ -5,11 +5,11 @@ import kotlinx.coroutines.launch
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.usecase.updatestatus.IUpdateStatusUseCase
-import tz.co.asoft.auth.usecase.userstate.IStateUseCase
+import tz.co.asoft.auth.usecase.userstate.IUserStateUseCase
 
 open class SignOutUseCase(
         private val repo: IUsersRepo,
-        private val userStateUC: IStateUseCase,
+        private val userStateUC: IUserStateUseCase,
         private val updateStatusUC: IUpdateStatusUseCase
 ) : ISignOutUseCase {
 

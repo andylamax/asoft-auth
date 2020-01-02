@@ -8,12 +8,12 @@ import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.tools.hex.hex
 import tz.co.asoft.auth.usecase.updatestatus.IUpdateStatusUseCase
-import tz.co.asoft.auth.usecase.userstate.IStateUseCase
+import tz.co.asoft.auth.usecase.userstate.IUserStateUseCase
 import tz.co.asoft.persist.result.catching
 
 open class SignInUseCase(
         private val repo: IUsersRepo,
-        private val userState: IStateUseCase,
+        private val userState: IUserStateUseCase,
         private val updateStatusUC: IUpdateStatusUseCase
 ) : ISignInUseCase {
     override suspend fun invoke(loginId: String, pwd: String) = catching {
