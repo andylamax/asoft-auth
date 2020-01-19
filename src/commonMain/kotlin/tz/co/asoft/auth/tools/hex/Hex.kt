@@ -39,6 +39,6 @@ val ByteArray.hex: String get() = toHexStringLower()
 
 fun String.toByteArray(): ByteArray {
     val out = ByteArray(this.length)
-    for (n in 0 until out.size) out[n] = this[n].toByte()
+    for (n in out.indices) out[n] = this[n].toByte()
     return out
 }

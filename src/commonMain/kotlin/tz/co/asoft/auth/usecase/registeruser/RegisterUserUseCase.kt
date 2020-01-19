@@ -18,12 +18,12 @@ open class RegisterUserUseCase(private val usersRepo: IUsersRepo, private val ac
             name = user.name
             permits = user.permits
         }
-        val userAccount = accountsRepo.createCatching(account).respond()
+        val userAccount = accountsRepo.create(account)
         user.accounts.add(userAccount)
         user.password = SHA256.digest((user.password ?: "123456").toUtf8Bytes()).hex
         if (usersRepo.userWithEmailExists(user.emails)) throw emailExists()
         if (usersRepo.userWithPhoneExists(user.phones)) throw phoneExists()
-        usersRepo.createCatching(user).respond()
+        usersRepo.create(user)
     }
 
     private fun emailExists() = Cause("User with same email already exists")

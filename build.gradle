@@ -8,7 +8,7 @@ buildscript {
         rx_version = "6.0.0"
         logging_version = "6.0.0"
         krypto_version = "1.9.1"
-        asoft_io_version = "2.0.0"
+        asoft_io_version = "2.1.0"
         test_version = "4.0.0"
         android_tools_version = "3.3.2"
     }
@@ -36,7 +36,7 @@ tasks.whenTaskAdded { task ->
 }
 
 group 'tz.co.asoft'
-version '26.1.0'
+version '27.0.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
