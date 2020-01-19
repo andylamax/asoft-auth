@@ -4,13 +4,12 @@ buildscript {
         serialization_version = "0.14.0"
         klock_version = "1.8.5"
         asoft_neo4j_version = "1.1.0"
-        persist_version = "14.0.2"
-        rx_version = "6.0.0"
-        logging_version = "6.0.0"
+        persist_version = "14.1.0"
+        rx_version = "6.1.0"
         krypto_version = "1.9.1"
         asoft_io_version = "2.1.0"
         test_version = "4.0.0"
-        android_tools_version = "3.3.2"
+        android_tools_version = "3.5.2"
     }
 
     repositories {
@@ -36,7 +35,7 @@ tasks.whenTaskAdded { task ->
 }
 
 group 'tz.co.asoft'
-version '27.0.0'
+version '27.1.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
@@ -97,13 +96,7 @@ kotlin {
     }
 
     js() {
-//        browser {
-//            testTask {
-//                useKarma {
-//                    useChrome()
-//                }
-//            }
-//        }
+//        browser()
 //        nodejs()
         compilations.all {
             tasks[compileKotlinTaskName].kotlinOptions {
@@ -119,13 +112,12 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-common')
                 api "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-                api "com.soywiz.korlibs.klock:klock-metadata:$klock_version"
+                api "com.soywiz.korlibs.klock:klock:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-metadata:$persist_version"
                 api "com.github.andylamax.asoft-rx:asoft-rx-metadata:$rx_version"
-                api "com.github.andylamax.asoft-logging:asoft-logging-metadata:$logging_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-metadata:$asoft_neo4j_version"
                 api "com.github.andylamax.asoft-io:asoft-io-metadata:$asoft_io_version"
-                api "com.soywiz.korlibs.krypto:krypto-metadata:$krypto_version"
+                api "com.soywiz.korlibs.krypto:krypto:$krypto_version"
             }
         }
 
@@ -139,13 +131,10 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-jdk8')
                 api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                api "com.soywiz.korlibs.klock:klock-jvm:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-jvm:$persist_version"
-                api "com.github.andylamax.asoft-logging:asoft-logging-jvm:$logging_version"
                 api "com.github.andylamax.asoft-rx:asoft-rx-jvm:$rx_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-jvm:$asoft_neo4j_version"
                 api "com.github.andylamax.asoft-io:asoft-io-jvm:$asoft_io_version"
-                api "com.soywiz.korlibs.krypto:krypto-jvm:$krypto_version"
             }
         }
 
@@ -159,13 +148,10 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-jdk8')
                 api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-                api "com.soywiz.korlibs.klock:klock-android:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-android:$persist_version"
                 api "com.github.andylamax.asoft-rx:asoft-rx-android:$rx_version"
-                api "com.github.andylamax.asoft-logging:asoft-logging-android:$logging_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-android:$asoft_neo4j_version"
                 api "com.github.andylamax.asoft-io:asoft-io-android:$asoft_io_version"
-                api "com.soywiz.korlibs.krypto:krypto-android:$krypto_version"
             }
         }
 
@@ -179,13 +165,10 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-js')
                 api "org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serialization_version"
-                api "com.soywiz.korlibs.klock:klock-js:$klock_version"
                 api "com.github.andylamax.asoft-persist:asoft-persist-js:$persist_version"
                 api "com.github.andylamax.asoft-rx:asoft-rx-js:$rx_version"
-                api "com.github.andylamax.asoft-logging:asoft-logging-js:$logging_version"
                 api "com.github.andylamax.asoft-neo4j:asoft-neo4j-js:$asoft_neo4j_version"
                 api "com.github.andylamax.asoft-io:asoft-io-js:$asoft_io_version"
-                api "com.soywiz.korlibs.krypto:krypto-js:$krypto_version"
             }
         }
 

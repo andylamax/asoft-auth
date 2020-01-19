@@ -1,9 +1,5 @@
 import di.injection
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import tz.co.asoft.auth.User
-import tz.co.asoft.logging.Logger
 import tz.co.asoft.test.AsyncTest
 import kotlin.test.*
 
