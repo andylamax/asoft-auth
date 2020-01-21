@@ -4,7 +4,7 @@ import kotlinx.coroutines.coroutineScope
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.usecase.userstate.IUserStateUseCase
-import tz.co.asoft.io.file.File
+import tz.co.asoft.io.File
 import tz.co.asoft.persist.result.catching
 
 open class UploadPhotoUseCase(

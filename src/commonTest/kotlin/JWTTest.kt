@@ -4,6 +4,7 @@ import tz.co.asoft.auth.jwt.signJWT
 import tz.co.asoft.auth.jwt.verifyJWT
 import kotlin.test.Test
 
+@ExperimentalStdlibApi
 class JWTTest {
 
     @ImplicitReflectionSerializer

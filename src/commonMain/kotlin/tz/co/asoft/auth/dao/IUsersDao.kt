@@ -4,7 +4,7 @@ import tz.co.asoft.auth.User
 import tz.co.asoft.auth.Email
 import tz.co.asoft.auth.Phone
 import tz.co.asoft.auth.UserAccount
-import tz.co.asoft.io.file.File
+import tz.co.asoft.io.File
 import tz.co.asoft.persist.dao.IDao
 
 interface IUsersDao : IDao<User> {

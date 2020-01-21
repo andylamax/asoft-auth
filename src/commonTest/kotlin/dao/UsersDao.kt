@@ -5,7 +5,7 @@ import tz.co.asoft.auth.Phone
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.UserAccount
 import tz.co.asoft.auth.dao.IUsersDao
-import tz.co.asoft.io.file.File
+import tz.co.asoft.io.File
 import tz.co.asoft.persist.dao.Cache
 
 class UsersDao : Cache<User>(), IUsersDao {

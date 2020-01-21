@@ -6,7 +6,7 @@ import tz.co.asoft.auth.Phone
 import tz.co.asoft.auth.UserAccount
 import tz.co.asoft.auth.dao.IUsersDao
 import tz.co.asoft.auth.dao.IUsersLocalDao
-import tz.co.asoft.io.file.File
+import tz.co.asoft.io.File
 import tz.co.asoft.persist.repo.Repo
 import tz.co.asoft.persist.repo.TwinRepo
 

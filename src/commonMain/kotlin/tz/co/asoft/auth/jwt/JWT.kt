@@ -1,9 +1,6 @@
 package tz.co.asoft.auth.jwt
 
 import com.soywiz.krypto.SHA256
-import io.ktor.util.InternalAPI
-import io.ktor.util.decodeBase64String
-import io.ktor.util.encodeBase64
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
@@ -15,24 +12,21 @@ class JWT<T> {
     var payload: T? = null
 }
 
-@UseExperimental(InternalAPI::class)
-fun String.encodeBase64Url() = encodeBase64().replace("=", "")
-
-@UseExperimental(InternalAPI::class)
 @ImplicitReflectionSerializer
+@ExperimentalStdlibApi
 inline fun <reified T : Any> signJWT(header: Header = Header(), payload: T, secret: String): String {
-    val headerHex = Json.stringify(Header.serializer(), header).encodeBase64Url()
-    val payloadHex = Json.stringify(T::class.serializer(), payload).encodeBase64Url()
+    val headerHex = Json.stringify(Header.serializer(), header).encodeBase64ToString()
+    val payloadHex = Json.stringify(T::class.serializer(), payload).encodeBase64ToString()
     val hash = SHA256.digest("$headerHex.$payloadHex.$secret".toUtf8Bytes()).hex
     return "$headerHex.$payloadHex.$hash"
 }
 
 @ImplicitReflectionSerializer
-@UseExperimental(InternalAPI::class)
+@ExperimentalStdlibApi
 inline fun <reified T : Any> verifyJWT(token: String, secret: String): JWT<T>? {
     val (header, payload) = token.split(".")
-    val h = Json.parse(Header.serializer(), header.decodeBase64String())
-    val p = Json.parse(T::class.serializer(), payload.decodeBase64String())
+    val h = Json.parse(Header.serializer(), header.decodeBase64())
+    val p = Json.parse(T::class.serializer(), payload.decodeBase64())
 
     if (token != signJWT(h, p, secret)) return null
 
