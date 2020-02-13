@@ -1,7 +1,5 @@
 package tz.co.asoft.auth.usecase.signout
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.usecase.updatestatus.IUpdateStatusUseCase
@@ -16,7 +14,7 @@ open class SignOutUseCase(
     override suspend operator fun invoke() {
         val user = userStateUC.liveUser.value ?: return
         userStateUC.liveUser.value = null
-        GlobalScope.launch { repo.deleteLocal() }
+        repo.deleteLocal()
         updateStatusUC(user, User.Status.SignedOut)
     }
 }
