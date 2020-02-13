@@ -9,6 +9,7 @@ import tz.co.asoft.rx.LiveData
 class UserStateUseCase(private val repo: IUsersRepo) : IUserStateUseCase {
     companion object {
         private var instance: IUserStateUseCase? = null
+        @Deprecated("Just instantiate the class in a single{} method")
         fun getInstance(repo: IUsersRepo) = instance
                 ?: UserStateUseCase(repo).also { instance = it }
     }
@@ -17,10 +18,12 @@ class UserStateUseCase(private val repo: IUsersRepo) : IUserStateUseCase {
 
     override fun onChange(scope: CoroutineScope, action: (User?) -> Unit) {
         if (liveUser.value == null) {
-            scope.launch { liveUser.value = currentUser() }
+            scope.launch { currentUser()?.let { liveUser.value = it } }
         }
         liveUser.onChange(scope, action)
     }
 
-    override suspend fun currentUser() = liveUser.value ?: repo.loadLocalUser()
+    override suspend fun currentUser() = liveUser.value ?: repo.loadLocalUser()?.takeIf {
+        it.status == User.Status.SignedIn.name
+    }
 }
