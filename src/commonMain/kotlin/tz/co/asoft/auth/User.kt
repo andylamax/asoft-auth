@@ -4,10 +4,12 @@ import com.soywiz.klock.DateTime
 import kotlinx.serialization.Serializable
 import tz.co.asoft.auth.tools.name.Name
 import tz.co.asoft.auth.tools.name.asName
+import tz.co.asoft.email.Email
 import tz.co.asoft.neo4j.Neo4JEntity
 import tz.co.asoft.neo4j.annotations.GeneratedValue
 import tz.co.asoft.neo4j.annotations.Id
 import tz.co.asoft.neo4j.annotations.NodeEntity
+import tz.co.asoft.phone.Phone
 
 @Serializable
 @NodeEntity
@@ -57,7 +59,7 @@ open class User : Claimer {
                 username = name.asName().first.toLowerCase()
                 password = "123456"
                 status = Status.values().random().name
-                emails.add(Email.fake(name))
+                emails.add(Email("fake@fake.com").value)
                 phones.add(Phone.fake)
             }
     }

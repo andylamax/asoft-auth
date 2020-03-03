@@ -1,7 +1,7 @@
 package tz.co.asoft.auth.usecase.deleteuser
 
-import tz.co.asoft.auth.Email
 import tz.co.asoft.auth.repo.IUsersRepo
+import tz.co.asoft.email.Email
 import tz.co.asoft.persist.result.catching
 import tz.co.asoft.persist.tools.Cause
 

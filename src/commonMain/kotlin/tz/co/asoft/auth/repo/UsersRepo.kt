@@ -1,14 +1,12 @@
 package tz.co.asoft.auth.repo
 
 import tz.co.asoft.auth.User
-import tz.co.asoft.auth.Email
-import tz.co.asoft.auth.Phone
 import tz.co.asoft.auth.UserAccount
 import tz.co.asoft.auth.dao.IUsersDao
 import tz.co.asoft.auth.dao.IUsersLocalDao
+import tz.co.asoft.email.Email
 import tz.co.asoft.io.File
-import tz.co.asoft.persist.repo.Repo
-import tz.co.asoft.persist.repo.TwinRepo
+import tz.co.asoft.phone.Phone
 
 class UsersRepo(override val remoteDao: IUsersDao, override val localDao: IUsersLocalDao) : IUsersRepo {
 

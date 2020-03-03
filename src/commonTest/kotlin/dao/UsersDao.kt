@@ -1,12 +1,12 @@
 package dao
 
-import tz.co.asoft.auth.Email
-import tz.co.asoft.auth.Phone
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.UserAccount
 import tz.co.asoft.auth.dao.IUsersDao
+import tz.co.asoft.email.Email
 import tz.co.asoft.io.File
 import tz.co.asoft.persist.dao.Cache
+import tz.co.asoft.phone.Phone
 
 class UsersDao : Cache<User>(), IUsersDao {
     override suspend fun uploadPhoto(user: User, photo: File) = user
