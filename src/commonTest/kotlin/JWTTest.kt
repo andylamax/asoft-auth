@@ -2,8 +2,10 @@ import kotlinx.serialization.ImplicitReflectionSerializer
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.jwt.signJWT
 import tz.co.asoft.auth.jwt.verifyJWT
+import kotlin.test.Ignore
 import kotlin.test.Test
 
+@Ignore
 @ExperimentalStdlibApi
 class JWTTest {
 
