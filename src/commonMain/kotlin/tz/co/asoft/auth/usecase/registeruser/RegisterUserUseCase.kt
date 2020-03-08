@@ -1,7 +1,6 @@
 package tz.co.asoft.auth.usecase.registeruser
 
 import com.soywiz.krypto.SHA256
-import kotlinx.serialization.toUtf8Bytes
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.UserAccount
 import tz.co.asoft.auth.repo.IUsersRepo
@@ -37,6 +36,7 @@ open class RegisterUserUseCase(private val usersRepo: IUsersRepo, private val ac
         it.verifiedPhones = verifiedPhones
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     override suspend operator fun invoke(user: User, ua: UserAccount?) = catching {
         val u = user.validated()
         val account = ua ?: UserAccount().apply {
@@ -45,7 +45,7 @@ open class RegisterUserUseCase(private val usersRepo: IUsersRepo, private val ac
         }
         val uAccount = accountsRepo.create(account)
         u.accounts.add(uAccount)
-        u.password = SHA256.digest((u.password ?: "123456").toUtf8Bytes()).hex
+        u.password = SHA256.digest((u.password ?: "123456").encodeToByteArray()).hex
         if (usersRepo.userWithEmailExists(u.emails)) throw emailExists()
         if (usersRepo.userWithPhoneExists(u.phones)) throw phoneExists()
         usersRepo.create(u)

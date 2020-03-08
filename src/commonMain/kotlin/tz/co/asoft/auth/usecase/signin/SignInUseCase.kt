@@ -1,7 +1,6 @@
 package tz.co.asoft.auth.usecase.signin
 
 import com.soywiz.krypto.SHA256
-import kotlinx.serialization.toUtf8Bytes
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.tools.hex.hex
@@ -16,8 +15,9 @@ open class SignInUseCase(
         private val userState: IUserStateUseCase,
         private val updateStatusUC: IUpdateStatusUseCase
 ) : ISignInUseCase {
+    @OptIn(ExperimentalStdlibApi::class)
     override suspend fun invoke(loginId: String, pwd: String) = catching {
-        val xpwd = SHA256.digest(pwd.toUtf8Bytes()).hex
+        val xpwd = SHA256.digest(pwd.encodeToByteArray()).hex
         if (loginId.contains("@")) {
             repo.load(Email(loginId), xpwd)
         } else {

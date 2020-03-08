@@ -1,22 +1,29 @@
 package tz.co.asoft.auth.jwt
 
 import kotlinx.io.ByteArrayOutputStream
+import kotlinx.serialization.InternalSerializationApi
 import tz.co.asoft.auth.tools.hex.toByteArray
 
 @ExperimentalStdlibApi
 fun String.encodeBase64ToString(): String = toByteArray().encodeBase64().decodeToString().replace("=", "")
 
 fun String.encodeBase64ToByteArray(): ByteArray = toByteArray().encodeBase64()
+
 @ExperimentalStdlibApi
 fun ByteArray.encodeBase64ToString(): String = encodeBase64().decodeToString()
 
+@OptIn(InternalSerializationApi::class)
 @ExperimentalStdlibApi
 fun String.decodeBase64(): String = toByteArray().decodeBase64().decodeToString()
 
+@OptIn(InternalSerializationApi::class)
 fun String.decodeBase64ToByteArray(): ByteArray = toByteArray().decodeBase64()
+
+@OptIn(InternalSerializationApi::class)
 @ExperimentalStdlibApi
 fun ByteArray.decodeBase64ToString(): String = decodeBase64().decodeToString()
 
+@OptIn(InternalSerializationApi::class)
 fun ByteArray.encodeBase64(): ByteArray {
     val table = (CharRange('A', 'Z') + CharRange('a', 'z') + CharRange('0', '9') + '+' + '/').toCharArray()
     val output = ByteArrayOutputStream()
@@ -39,6 +46,7 @@ fun ByteArray.encodeBase64(): ByteArray {
     return output.toByteArray()
 }
 
+@InternalSerializationApi
 fun ByteArray.decodeBase64(): ByteArray {
     val table = intArrayOf(
             -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,

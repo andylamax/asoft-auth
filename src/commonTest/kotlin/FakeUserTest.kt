@@ -4,7 +4,6 @@ import tz.co.asoft.auth.UserRef
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-@Ignore
 class FakeUserTest {
     @Test
     fun listOfFakeUsers() {

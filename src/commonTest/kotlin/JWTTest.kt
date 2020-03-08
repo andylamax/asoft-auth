@@ -5,7 +5,6 @@ import tz.co.asoft.auth.jwt.verifyJWT
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-@Ignore
 @ExperimentalStdlibApi
 class JWTTest {
 
