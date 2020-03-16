@@ -1,6 +1,6 @@
 package tz.co.asoft.auth.usecase.updatestatus
 
-import com.soywiz.klock.DateTime
+import tz.co.asoft.klock.DateTime
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import tz.co.asoft.auth.User

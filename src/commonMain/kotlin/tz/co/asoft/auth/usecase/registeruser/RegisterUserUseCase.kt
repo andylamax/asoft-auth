@@ -1,14 +1,13 @@
 package tz.co.asoft.auth.usecase.registeruser
 
-import com.soywiz.krypto.SHA256
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.UserAccount
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.tools.hex.hex
 import tz.co.asoft.auth.tools.name.asName
 import tz.co.asoft.email.Email
+import tz.co.asoft.krypto.SHA256
 import tz.co.asoft.persist.repo.IRepo
-import tz.co.asoft.persist.result.Result
 import tz.co.asoft.persist.result.catching
 import tz.co.asoft.persist.tools.Cause
 import tz.co.asoft.phone.Phone

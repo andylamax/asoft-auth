@@ -1,6 +1,6 @@
 package tz.co.asoft.auth.usecase.signin
 
-import com.soywiz.krypto.SHA256
+import tz.co.asoft.krypto.SHA256
 import tz.co.asoft.auth.User
 import tz.co.asoft.auth.repo.IUsersRepo
 import tz.co.asoft.auth.tools.hex.hex

@@ -1,10 +1,10 @@
 package tz.co.asoft.auth.jwt
 
-import com.soywiz.krypto.SHA256
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
-import tz.co.asoft.auth.tools.hex.hex
+import tz.co.asoft.krypto.SHA256
+import tz.co.asoft.krypto.hex
 
 class JWT<T> {
     var header = Header()

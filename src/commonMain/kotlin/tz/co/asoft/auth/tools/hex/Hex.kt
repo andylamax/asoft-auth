@@ -1,5 +1,6 @@
 package tz.co.asoft.auth.tools.hex
 
+@Deprecated("Use tz.co.asoft.krypto.Hex")
 object Hex {
     val DIGITS = "0123456789ABCDEF"
     val DIGITS_UPPER = DIGITS.toUpperCase()

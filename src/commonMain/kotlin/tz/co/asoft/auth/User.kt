@@ -1,11 +1,10 @@
 package tz.co.asoft.auth
 
-import com.soywiz.klock.DateTime
 import kotlinx.serialization.Serializable
 import tz.co.asoft.auth.tools.name.Name
 import tz.co.asoft.auth.tools.name.asName
 import tz.co.asoft.email.Email
-import tz.co.asoft.neo4j.Neo4JEntity
+import tz.co.asoft.klock.DateTime
 import tz.co.asoft.neo4j.annotations.GeneratedValue
 import tz.co.asoft.neo4j.annotations.Id
 import tz.co.asoft.neo4j.annotations.NodeEntity
