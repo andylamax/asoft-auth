@@ -2,7 +2,7 @@ package tz.co.asoft.auth.dao
 
 import kotlinx.serialization.json.Json
 import tz.co.asoft.auth.User
-import tz.co.asoft.persist.storage.Storage
+import tz.co.asoft.storage.Storage
 import tz.co.asoft.platform.core.Ctx
 
 open class UsersLocalDao(ctx: Ctx, name: String) : IUsersLocalDao {

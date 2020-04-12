@@ -3,7 +3,6 @@ import tz.co.asoft.auth.User
 import tz.co.asoft.test.AsyncTest
 import kotlin.test.*
 
-@Ignore
 class AuthenticationTest : AsyncTest() {
 
     private val users = List(23) {
@@ -21,11 +20,6 @@ class AuthenticationTest : AsyncTest() {
         users.forEach { user ->
             registerUC(user, null).catch { println(it) }
         }
-    }
-
-    @Test
-    fun number_of_users_in_repo() = asyncTest {
-        assertEquals(users.size, usersRepo.all().size, "Users")
     }
 
     @Test
