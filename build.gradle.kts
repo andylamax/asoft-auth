@@ -19,14 +19,6 @@ fun KotlinDependencyHandler.asoftLibs(platform: String) {
     api(asoftBasics("storage", platform))
 }
 
-repositories {
-    google()
-    jcenter()
-    maven(url = "https://jitpack.io")
-    maven(url = "https://dl.bintray.com/kotlin/kotlin-dev")
-    maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
-}
-
 android {
     configureAndroid()
 }
