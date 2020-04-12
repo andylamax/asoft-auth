@@ -19,9 +19,6 @@ fun KotlinDependencyHandler.asoftLibs(platform: String) {
     api(asoftBasics("storage", platform))
 }
 
-group = "tz.co.asoft"
-version = "32.0.0-alpha1"
-
 repositories {
     google()
     jcenter()
