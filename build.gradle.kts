@@ -20,7 +20,7 @@ fun KotlinDependencyHandler.asoftLibs(platform: String) {
 }
 
 group = "tz.co.asoft"
-version = "31.0.0"
+version = "32.0.0-alpha1"
 
 repositories {
     google()
